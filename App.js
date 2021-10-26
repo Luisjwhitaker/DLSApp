@@ -25,8 +25,20 @@ import GuidesScreen from './screens/GuidesScreen';
 const Stack = createStackNavigator();
 
 
+
+
 function App() {
   const [isSignedIn, setIsSignedIn] = useState(null);
+  async function getData(){
+    try {
+      const value = await AsyncStorage.getItem('token')
+      if(value !== null) {
+        setIsSignedIn(value)
+      }
+    } catch(e) {
+      console.log(e)
+    }
+  }
   getData()
   return (
     isSignedIn ? (
@@ -67,16 +79,7 @@ export default props => {
   }
 };
 
-const getData = async () => {
-  try {
-    const value = await AsyncStorage.getItem('token')
-    if(value !== null) {
-      setIsSignedIn(value)
-    }
-  } catch(e) {
-    console.log(e)
-  }
-}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
