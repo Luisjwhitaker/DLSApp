@@ -12,6 +12,7 @@ export default function CreditsScreen() {
     <View style={styles.container}>
       <View>
         <Text style={styles.titleText}>Credits:</Text>
+        <Text style={styles.subTitleText}>Made by Luis John Whitaker</Text>
       </View>
       <View style={styles.buttonAllign}>
       <TouchableOpacity
@@ -56,6 +57,13 @@ export default function CreditsScreen() {
       fontSize: 60,
       marginTop: 150,
       textAlign: 'center',
+    },
+    subTitleText: {
+      fontFamily: "chalkboard-se-bold",
+      fontSize: 50,
+      marginTop: 50,
+      textAlign: 'center',
+      color: 'grey',
     },
 
   });
