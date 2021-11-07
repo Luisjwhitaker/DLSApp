@@ -6,6 +6,9 @@ import 'react-native-gesture-handler';
 import { NavigationContainer, useNavigation} from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
+
+
 export default function LoginScreen() {
   const [username, setUsername] = useState('username');
   const [password, setPassword] = useState('password');
@@ -18,31 +21,11 @@ export default function LoginScreen() {
         alert('Invalid Login: Please Try Again')
       } else {
         await AsyncStorage.setItem('token', String(value))
+        navigation.navigate('Splash')
         console.log('Data successfully saved')
       }
     } catch (e) {
       console.log(e)
-    }
-  }
-
-  const getData = async () => {
-    try {
-      const value = await AsyncStorage.getItem('token')
-      if(value !== null) {
-        setToken(value)
-      }
-    } catch(e) {
-      console.log(e)
-    }
-  }
-
-  const clearStorage = async () => {
-    try {
-      await AsyncStorage.clear()
-      setToken(null)
-      console.log('Storage successfully cleared!')
-    } catch (e) {
-      console.log('Failed to clear the async storage.')
     }
   }
 
@@ -108,9 +91,8 @@ export default function LoginScreen() {
         .catch(error => console.log(error))
     } catch (e) {
       console.log(e)
-      console.log('could not connect to website')
+      Alert.alert('could not connect to website')
     }
-
   }
 }
 

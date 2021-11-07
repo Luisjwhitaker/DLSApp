@@ -26,7 +26,6 @@ import GuidesScreen from './screens/GuidesScreen';
 const Stack = createStackNavigator();
 
 function App() {
-
   return (
       <NavigationContainer>
       <StatusBar backgroundColor="#ffe6d9"/>
@@ -38,13 +37,14 @@ function App() {
       </NavigationContainer>
   );
 }
-
+// the stack that will be shown if the user is NOT logged in
 const AuthStack = () => (
   <Stack.Navigator>
     <Stack.Screen name="LoginScreen" component={LoginScreen} options={{header: () => null}}/>
     <Stack.Screen name="RegisterScreen" component={RegisterScreen} options={{header: () => null}}/>
   </Stack.Navigator>
 );
+// the stack that will be shown if the user is logged in
 const RootStack = () => (
   <Stack.Navigator>
     <Stack.Screen name="LobbyScreen" component={LobbyScreen} options={{header: () => null}}/>
@@ -56,11 +56,11 @@ const RootStack = () => (
   </Stack.Navigator>
 );
 
+// load font
 export default props => {
   let [fontsLoaded] = useFonts({
     'chalkboard-se-bold': require('./assets/fonts/chalkboard-se-bold.ttf'),
   });
-
   if (!fontsLoaded) {
     return <AppLoading />;
   } else {

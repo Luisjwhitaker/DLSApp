@@ -6,18 +6,11 @@ import { NavigationContainer, useNavigation} from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
+
 export default LobbyScreen = () => {
   const navigation = useNavigation();
 
-const clearStorage = async () => {
-  try {
-    await AsyncStorage.clear()
-    console.log('Storage successfully cleared!')
-  } catch (e) {
-    console.log('Failed to clear the async storage.')
-    console.log(e)
-  }
-}
+
 
   return (
     <View style={styles.container}>
@@ -69,7 +62,7 @@ const clearStorage = async () => {
       <View style={styles.buttonBottom}>
         <TouchableOpacity
           style={styles.buttonTouchableBottom}
-          onPress={() => clearStorage()}
+          onPress={logOut}
           underlayColor='#fff'>
             <Text style={styles.baseText}>Log Out</Text>
         </TouchableOpacity>
@@ -77,6 +70,23 @@ const clearStorage = async () => {
     </View>
 
   );
+async function clearStorage(){
+  try {
+    await AsyncStorage.clear()
+    await console.log('Storage successfully cleared!')
+  } catch (e) {
+    console.log('Failed to clear the async storage.')
+    console.log(e)
+  }
+}
+
+async function logOut(){
+  try {
+    clearStorage().then(()=>navigation.navigate('Splash'))
+  } catch(e) {
+    console.log(e)
+  }
+}
 }
 
 const styles = StyleSheet.create({
