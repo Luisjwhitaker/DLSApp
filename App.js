@@ -12,6 +12,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 //screen imports
+import SplashScreen from './screens/SplashScreen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import LobbyScreen from './screens/LobbyScreen';
@@ -24,46 +25,36 @@ import GuidesScreen from './screens/GuidesScreen';
 // naviagation constans
 const Stack = createStackNavigator();
 
-
-
-
 function App() {
-  const [isSignedIn, setIsSignedIn] = useState(null);
-  async function getData(){
-    try {
-      const value = await AsyncStorage.getItem('token')
-      if(value !== null) {
-        setIsSignedIn(value)
-      }
-    } catch(e) {
-      console.log(e)
-    }
-  }
-  getData()
+
   return (
-    isSignedIn ? (
-      <NavigationContainer>
-          <StatusBar backgroundColor="#ffe6d9"/>
-      <Stack.Navigator>
-        <Stack.Screen name="LobbyScreen" component={LobbyScreen} options={{header: () => null}}/>
-        <Stack.Screen name="LogActivityScreen" component={LogActivityScreen} options={{header: () => null}}/>
-        <Stack.Screen name="PreviousLogsScreen" component={PreviousLogsScreen} options={{header: () => null}}/>
-        <Stack.Screen name="AnnouncementsScreen" component={AnnouncementsScreen} options={{header: () => null}}/>
-        <Stack.Screen name="GuidesScreen" component={GuidesScreen} options={{header: () => null}}/>
-        <Stack.Screen name="CreditsScreen" component={CreditsScreen} options={{header: () => null}}/>
-      </Stack.Navigator>
-      </NavigationContainer>
-    ) : (
       <NavigationContainer>
       <StatusBar backgroundColor="#ffe6d9"/>
-      <Stack.Navigator>
-        <Stack.Screen name="LoginScreen" component={LoginScreen} options={{header: () => null}}/>
-        <Stack.Screen name="RegisterScreen" component={RegisterScreen} options={{header: () => null}}/>
-      </Stack.Navigator>
+        <Stack.Navigator initialRouteName='Splash'>
+          <Stack.Screen name='Splash' options={{ headerShown: false }} component={SplashScreen} />
+          <Stack.Screen name='Auth' options={{ headerShown: false }} component={AuthStack} />
+          <Stack.Screen name='Root' options={{ headerShown: false }} component={RootStack} />
+        </Stack.Navigator>
       </NavigationContainer>
-    )
   );
 }
+
+const AuthStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="LoginScreen" component={LoginScreen} options={{header: () => null}}/>
+    <Stack.Screen name="RegisterScreen" component={RegisterScreen} options={{header: () => null}}/>
+  </Stack.Navigator>
+);
+const RootStack = () => (
+  <Stack.Navigator>
+    <Stack.Screen name="LobbyScreen" component={LobbyScreen} options={{header: () => null}}/>
+    <Stack.Screen name="LogActivityScreen" component={LogActivityScreen} options={{header: () => null}}/>
+    <Stack.Screen name="PreviousLogsScreen" component={PreviousLogsScreen} options={{header: () => null}}/>
+    <Stack.Screen name="AnnouncementsScreen" component={AnnouncementsScreen} options={{header: () => null}}/>
+    <Stack.Screen name="GuidesScreen" component={GuidesScreen} options={{header: () => null}}/>
+    <Stack.Screen name="CreditsScreen" component={CreditsScreen} options={{header: () => null}}/>
+  </Stack.Navigator>
+);
 
 export default props => {
   let [fontsLoaded] = useFonts({
