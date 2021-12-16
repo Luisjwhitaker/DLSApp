@@ -75,7 +75,7 @@ export default function LoginScreen() {
 // Function for LogIn button
   async function SubmitLogin(){
     try {
-      await fetch('http://192.168.100.11:100/api/login/', {
+      await fetch('https://dlssite.herokuapp.com/api/login/', {
         method:'post',
         mode:'no-cors',
         headers: {

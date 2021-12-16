@@ -59,7 +59,7 @@ export default function RegisterScreen() {
   async function SubmittRegister(){
     try {
 
-      await fetch('http://192.168.100.11:100/api/register/', {
+      await fetch('https://dlssite.herokuapp.com/api/register/', {
         method:'post',
         mode:'no-cors',
         headers: {

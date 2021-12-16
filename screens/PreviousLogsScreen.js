@@ -12,7 +12,7 @@ export default PreviousLogsScreen = () => {
 
   const getLogs = async () => {
     try {
-      const response = await fetch('http://192.168.100.11:100/api/task-list/');
+      const response = await fetch('https://dlssite.herokuapp.com/api/task-list');
       const json = await response.json();
       setData(json);
     } catch (error) {

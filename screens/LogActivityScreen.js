@@ -58,7 +58,7 @@ export default LogActivityScreen = () => {
   async function SubmitLog(){
     try {
 
-      await fetch('http://192.168.100.11:100/api/task-create/', {
+      await fetch('https://dlssite.herokuapp.com/api/task-create/', {
         method:'post',
         mode:'no-cors',
         headers: {
